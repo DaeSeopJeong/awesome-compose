@@ -14,9 +14,9 @@ services:
         condition: service_healthy
   db:
     # We use a mariadb image which supports both amd64 & arm64 architecture
-    # image: mariadb:10.6.4-focal
+    image: mariadb:10.6.4-focal
     # If you really want to use MySQL, uncomment the following line
-    image: mysql:8.0.31-oracle
+    #image: mysql:8.0.31-oracle
     environment:
       - MYSQL_DATABASE=example
       - MYSQL_ROOT_PASSWORD_FILE=/run/secrets/db-password
@@ -28,6 +28,8 @@ services:
       start_period: 30s
     secrets:
       - db-password
+    ports:
+      - 3306:3306ß
     volumes:
       - db-data:/var/lib/mysql
     networks:
